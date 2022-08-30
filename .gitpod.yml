@@ -1,5 +1,5 @@
 tasks:
-  - init: test ! -e /workspace/.docker-root && for i in archlinux ubuntu debian gitpod/workspace-full; do docker pull $i; done
+  - init: echo hey; echo $?
 
 github:
   prebuilds:
