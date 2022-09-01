@@ -1,3 +1,26 @@
 github:
   prebuilds:
     branches: true
+
+
+image:
+  file: .gitpod.Dockerfile
+
+tasks:
+  - name: Move pnpm virt store inside /workspace
+    before: |
+      source="/base/store";
+      target="/workspace/.pnpm_virt";
+
+      if test -e "$source"; then {
+        rm -rf "$target";
+        mv "$source" "$target";
+      } fi
+
+      gp sync-done "pnpm-virt"; # Signals the waiting tasks
+
+  - name: some other tasks depending on the virt store
+    command: |
+      gp sync-await "pnpm-virt"; # Waits for the virt store to be fully moved
+
+      pnpm install .;
