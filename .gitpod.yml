@@ -1,14 +1,13 @@
 tasks:
   - name: Shutdown daemon
     command: |
-      (
-        function shutdown() {
-          # Do stuff here, for example
-          touch /workspace/hmmmmm;
-          sync /workspace/*
-        }
+      function shutdown() {
+        # Do stuff here, for example
+        touch /workspace/hmmmmm;
+        sync /workspace/*
+      }
 
-        trap 'shutdown; exit' SIGTERM;
-        exec {sfd}<> <(:);
-        until read -t 3600 -u $sfd; do continue; done;
-      ) & disown && exit
+      trap 'shutdown; exit' SIGTERM;
+      printf '%s\n' 'Waiting for SIGTERM';
+      exec {sfd}<> <(:);
+      until read -t 3600 -u $sfd; do continue; done;
