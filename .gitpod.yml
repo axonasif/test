@@ -1,3 +1,14 @@
-github:
-  prebuilds:
-    branches: true
+tasks:
+  - name: Shutdown daemon
+    command: |
+      (
+        function shutdown() {
+          # Do stuff here, for example
+          touch /workspace/hmmmmm;
+          sync /workspace/*
+        }
+
+        trap 'shutdown; exit' SIGTERM;
+        exec {sfd}<> <(:);
+        until read -t 3600 -u $sfd; do continue; done;
+      ) & disown && exit
