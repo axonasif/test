@@ -1,4 +1,4 @@
-image: axonasif/workspace-vnc:latest
+image: gitpod/workspace-vnc:latest
 github:
   prebuilds:
     branches: true
