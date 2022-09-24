@@ -1,4 +1,4 @@
-image: gitpod/workspace-vnc:latest
+image: gitpod/workspace-full-vnc:latest
 github:
   prebuilds:
     branches: true
