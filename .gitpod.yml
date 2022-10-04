@@ -7,7 +7,9 @@ tasks:
   - name: Test using `pyenv install <>` from prebuild env (excluded this test because it takes a while during my development)
     init: pyenv install 3.9.0
   - name: cowsay
-    command: cowsay Gitpod
+    command: |
+      cowsay Gitpod
+      
 
 github:
   prebuilds:
