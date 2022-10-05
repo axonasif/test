@@ -1,5 +1,5 @@
 github:
   prebuilds:
     branches: true
-tasks:
-  - init: docker-compose pull
+# tasks:
+#   - init: docker-compose pull
