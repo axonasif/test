@@ -1,5 +1,16 @@
 # When to use `workspace-base` Image
 
+Hey,
+
+the default docker image is workspace-full. As I have already an own docker image, does it make sense to use the base one?
+
+Are there any benefits of using base over full in terms of
+
+- Performance
+- Starting Time?
+
+I know i have to install some packages, but thats pretty fast done
+
 ![axon](https://cdn.discordapp.com/avatars/465353539363930123/946f04e6812a3f0b3494fccf499d2d45.webp?size=20) Hey @Shyim, yes, you can use it for a lightweight base and quick start time (objective)
 ----
 ![shyim](https://cdn.discordapp.com/avatars/186129546574168065/65bafe1ccfb009894eb69f2ec7068e27.webp?size=20) Does it make difference If I build the image by own and push it to Dockerhub?
