@@ -4,9 +4,11 @@ image: gitpod/workspace-postgres:latest
 # List the start up tasks. Learn more https://www.gitpod.io/docs/config-start-tasks/
 tasks:
   - init: echo 'init script' # runs during prebuild
-    command: |
+  
+  - command: |
       echo 'start script'
       gp open main.py
+      python3 main.py
 
 # List the ports to expose. Learn more https://www.gitpod.io/docs/config-ports/
 ports:
