@@ -1,5 +1,6 @@
 
-image: gitpod/workspace-postgres:latest
+# image: gitpod/workspace-postgres:latest
+image: axonasif/workspace-postgres:latest
 #   file: .gitpod.Dockerfile
 
 # List the start up tasks. Learn more https://www.gitpod.io/docs/config-start-tasks/
