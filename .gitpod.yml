@@ -1,3 +1,6 @@
-github:
-  prebuilds:
-    branches: true
+image: gitpod/workspace-full:2023-03-21-19-31-17
+
+tasks:
+  - before: echo "Before world"
+    init: echo "Init world"
+    command: echo "Command world"
