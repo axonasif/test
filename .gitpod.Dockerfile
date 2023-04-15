@@ -1,4 +1,4 @@
-FROM axonasif/workspace-python:debug2
+FROM axonasif/workspace-python:debug3
 
 # Test python version
 RUN python --version > ~/python_version_test
