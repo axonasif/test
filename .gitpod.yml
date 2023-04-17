@@ -1,17 +1,5 @@
-image:
-  file: .gitpod.Dockerfile
 
-tasks:
-  - name: Test installing pip package from prebuild env
-    init: pip install bpytop
-  - name: Test using `pyenv install <>` from prebuild env
-    init: pyenv install 3.9.0
-    command: pyenv shell 3.9.0 # test if the installed version got persisted from prebuild
-  - name: cowsay
-    command: |
-      cowsay Gitpod
-      
-
-github:
-  prebuilds:
-    branches: true
+vscode:
+  extensions:
+    - ms-python.isort
+    - ms-python.python
