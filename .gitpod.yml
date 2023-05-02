@@ -3,3 +3,10 @@ github:
     branches: true
 tasks:
   - init: docker-compose pull
+    command: docker run -p 3000:3000 -it gitpod/workspace-base python3 -m http.server 3000
+  
+ports:
+  - name: frontend
+    port: 3000
+    onOpen: open-browser
+    visibility: public
