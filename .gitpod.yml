@@ -3,6 +3,7 @@ github:
     branches: true
 tasks:
   - init: docker-compose pull
+    before: gp ports visibility 3000:public
     command: docker run -p 3000:3000 -it gitpod/workspace-base python3 -m http.server 3000
   
 ports:
