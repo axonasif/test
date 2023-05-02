@@ -13,9 +13,3 @@ tasks:
       gp ports visibility 3000:public
       sleep 1
       gp ports visibility 3000:public
-
-ports:
-  - name: random
-    port: 3000
-    onOpen: open-browser
-    visibility: public
