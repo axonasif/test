@@ -1,4 +1,8 @@
-image: gitpod/workspace-full-vnc
+image: gitpod/workspace-full-vnc:latest
 github:
   prebuilds:
     branches: true
+
+tasks:
+  - name: Hello
+    command: echo hello world
