@@ -6,3 +6,7 @@ github:
 tasks:
   - name: Hello
     command: echo hello world
+  - name: Foo
+    command: echo Foo
+  - name: Bar
+    command: echo bar
