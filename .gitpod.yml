@@ -1,3 +1,5 @@
+image: axonasif/workspace-python_postgres:latest
+
 github:
   prebuilds:
     branches: true
