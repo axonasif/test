@@ -1,4 +1,4 @@
-image: axonasif/workspace-test2:latest
+image: axonasif/workspace-test:latest
 
 github:
   prebuilds:
