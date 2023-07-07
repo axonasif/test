@@ -1,3 +1,5 @@
+image: axonasif/workspace-test:latest
+
 github:
   prebuilds:
     branches: true
