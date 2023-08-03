@@ -1,6 +1,6 @@
 FROM alpine:3.18.2
 
-RUN apk add \
+RUN apk add --no-cache \
         git \
         bash \
         sudo \
