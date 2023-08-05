@@ -2,7 +2,7 @@ FROM alpine:3.18.2
 
 RUN apk add --no-cache \
         git \
-        git-lfs \
+        # git-lfs \ # uncomment if needed
         bash \
         sudo \
         docker \
