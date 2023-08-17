@@ -1,4 +1,4 @@
-image: axonasif/workspace-base-vnc:latest
+image: axonasif/workspace-full-vnc:16-08-2023
 github:
   prebuilds:
     branches: true
