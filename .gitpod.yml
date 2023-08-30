@@ -1,3 +1,5 @@
+image: gitpod/workspace-base
+
 github:
   prebuilds:
     branches: true
