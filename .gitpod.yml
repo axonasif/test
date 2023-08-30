@@ -6,16 +6,5 @@ tasks:
   - name: Init project and run server
     env:
       HEY: "man"
-    # init: |
-    #   if test ! -e flaskr; then {
-    #     tmp_dir=/tmp/.fgc
-    #     git clone --filter=tree:0 https://github.com/pallets/flask "${tmp_dir}"
-    #     mv "${tmp_dir}/examples/tutorial"/{.*,*} . 2>/dev/null
-    #     rm -rf "${tmp_dir}"
-    #   } fi
-
-    #   pip install -e .
-    #   flask --app flaskr init-db
     command: echo $HEY
-      # flask --app flaskr run --debug
 
