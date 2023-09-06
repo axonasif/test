@@ -1,5 +1,6 @@
-# We run the task commands in a subshell and exit the main shells, thus vscode is left with no open shells.
+image: gitpod/workspace-base
 
+# We run the task commands in a subshell and exit the main shells, thus vscode is left with no open shells.
 tasks:
   # Terminal 1
   - name: combined tasks
@@ -12,7 +13,10 @@ tasks:
 
       exit # <- closes the vscode terminal tab
       
-    before: echo "something" > .env && exit # <- closes the vscode terminal tab
+    before: |
+      printf '%s\n' 'f=/tmp/.ok; if test ! -e $f; then touch $f; exit; fi' >> ~/.bashrc # To close the empty terminal Gitpod opens, once.
+
+      echo "something" > .env && exit # <- closes the vscode terminal tab
 
   # Terminal 2
   - before: |
