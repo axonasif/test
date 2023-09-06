@@ -1,12 +1,28 @@
+# We run the task commands in a subshell and exit the main shells, thus vscode is left with no open shells.
+
 tasks:
+  # Terminal 1
   - name: combined tasks
-    command: echo "this is a command (combined)"
-    before: echo "this is a before (combined)"
+    command: |
+      (
+        echo "this is a command (combined)"
+        cowsay Hello
+        python3 -c "print('hi')"
+      ) & disown # <- subshell background process
 
-  # Below inherits separate terminals
-  - command: echo "this is a command but separate"
-  - before: echo "this is a before but separate"
+      exit # <- closes the vscode terminal tab
+      
+    before: echo "something" > .env && exit # <- closes the vscode terminal tab
 
+  # Terminal 2
+  - before: |
+      (
+        npm install
+        cargo check
+      ) & disown # <- subshell background process
+
+      exit # <- closes the vscode terminal tab
+        
 github:
   prebuilds:
     branches: true
