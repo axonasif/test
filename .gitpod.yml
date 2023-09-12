@@ -1,3 +1,5 @@
+image: axonasif/workspace-full-bun
+
 github:
   prebuilds:
     branches: true
