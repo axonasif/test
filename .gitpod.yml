@@ -1,4 +1,4 @@
-image: axonasif/workspace-test:latest
+image: us-central1-docker.pkg.dev/developer-community-success/hello-gitpod/base
 
 github:
   prebuilds:
