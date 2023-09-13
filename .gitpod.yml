@@ -1,4 +1,4 @@
-image: us-central1-docker.pkg.dev/developer-community-success/hello-gitpod/base
+image: us-central1-docker.pkg.dev/developer-community-success/hello-gitpod/minimal-ubuntu
 
 github:
   prebuilds:
