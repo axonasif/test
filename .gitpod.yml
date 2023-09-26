@@ -1,3 +1,5 @@
+image: node:buster
+
 github:
   prebuilds:
     branches: true
