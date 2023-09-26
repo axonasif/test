@@ -1,4 +1,4 @@
-image: node:buster
+image: rust:1.72.1-buster
 
 github:
   prebuilds:
