@@ -5,3 +5,6 @@ github:
 additionalRepositories:
   - url: https://github.com/axonasif/gearlock
     checkoutLocation: gearlock
+
+image:
+  file: .gitpod.Dockerfile
