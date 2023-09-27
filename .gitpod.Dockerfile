@@ -1,16 +1,17 @@
 FROM alpine:3.18.2
 
 RUN apk add --no-cache \
-        git \
-        # git-lfs \ # uncomment if needed
-        bash \
-        sudo \
-        docker \
-        gcompat \
-        libgcc \
-        libstdc++ \
-        iptables \
-        
-    # Add gitpod user
+    git\
+    bash \
+    sudo  \
+    docker \
+    iptables\
+    libgcc \
+    gcompat \
+    libstdc++ gcc\
     && echo '%gitpod ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/gitpod \
     && addgroup -g 33333 gitpod && adduser -u 33333 -G gitpod -h /home/gitpod -s /bin/bash -D gitpod
+
+USER gitpod
+RUN sudo apk add --no-cache curl \
+    && curl -fsSL https://sh.rustup.rs | sh -s -- -y
