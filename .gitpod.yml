@@ -1,3 +1,7 @@
 github:
   prebuilds:
     branches: true
+
+vscode:
+  extensions:
+    - ms-python.python
