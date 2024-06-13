@@ -8,7 +8,8 @@ tasks:
    command: docker-compose up
  - name: Compile Extensions
    command: gp url 3000 > .gitpod-url && node build-extension.js
- openMode: split-right
+   openMode: split-right
+   
 ports:
  - port: 3000
  onOpen: open-browser
