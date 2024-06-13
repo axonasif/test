@@ -1,0 +1,6 @@
+version: "3.0"
+services:
+  web:
+    image: "ubuntu:latest"
+  redis:
+    image: "redis:alpine"
