@@ -1,3 +1,6 @@
-github:
-  prebuilds:
-    branches: true
+tasks:
+  - name: Test
+    before: |
+      touch $RANDOM
+    init: |
+      touch $RANDOM-abc
