@@ -1,4 +1,4 @@
-image: registry.hub.docker.com/axonasif/workspace-base-vnc:latest
+image: registry.hub.docker.com/githubactivity/workspace-full@sha256:72c3f1d720d8307c775036535ff2ca9709ce9fb86aabfb88784a64bb0cb5103a
 
 
 tasks:
