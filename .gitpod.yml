@@ -1,7 +1,5 @@
-image: axonasif/workspace-base-vnc:latest
-github:
-  prebuilds:
-    branches: true
+image: registry.hub.docker.com/axonasif/workspace-base-vnc:latest
+
 
 tasks:
   - name: Hello
