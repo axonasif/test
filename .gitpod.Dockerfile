@@ -5,7 +5,7 @@ RUN <<EOR
 sudo tee -a /etc/bash.bashrc <<'BASH'
 
 
-export SOMETHING="$(time)"
+export SOMETHING="$(echo hey)"
 BASH
 
 EOR
