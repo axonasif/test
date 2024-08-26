@@ -3,5 +3,4 @@ additionalRepositories:
     checkoutLocation: gearlock
   - url: https://github.com/bashbox/bashbox
 
-image:
-  file: .gitpod.Dockerfile
+image: gitpod/workspace-base
