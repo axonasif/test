@@ -1,10 +1,7 @@
-github:
-  prebuilds:
-    branches: true
-
 additionalRepositories:
   - url: https://github.com/axonasif/gearlock
     checkoutLocation: gearlock
+  - url: https://github.com/bashbox/bashbox
 
 image:
   file: .gitpod.Dockerfile
