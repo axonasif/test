@@ -1,7 +1,7 @@
 tasks:
   - name: Large files
     command: |
-      curl -L "https://ash-speed.hetzner.com/10GB.bin" -o lf_$RANDOM.bin
+      cat /dev/random > large_$RANDOM.data
       
 
 image: gitpod/workspace-base
