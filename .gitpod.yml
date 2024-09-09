@@ -1,3 +1,5 @@
+image: ubuntu:20.04
+
 tasks:
   - name: Checkout default branches for additionalRepositories
     before: |
