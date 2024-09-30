@@ -1,5 +1,0 @@
-{
-  "image": "mcr.microsoft.com/devcontainers/base:alpine-3.19",
-  "features": {
-  }
-}
