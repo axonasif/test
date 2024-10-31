@@ -2,7 +2,7 @@ image: gitpod/workspace-base
 
 tasks:
   - init: |
-      sleep 40
+      sleep 120
       if test ! -e /workspace/hey; then
         printf '%s/%s' "$(date)" "$GITPOD_INSTANCE_ID" > /workspace/hey
       fi
@@ -18,3 +18,4 @@ tasks:
 # 17054
 # 2068
 # 16713
+# 28885
