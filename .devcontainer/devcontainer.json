@@ -7,7 +7,7 @@
     "--device=/dev/ppp"
   ],
   "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:1": {}
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
   },
   "settings": {
     "terminal.integrated.shell.linux": "/bin/bash"
@@ -17,6 +17,7 @@
     "ms-python.python",
     "ms-azuretools.vscode-docker"
   ],
+  "initializeCommand": "modprobe ppp_generic",
   "postCreateCommand": "sudo apt-get update && sudo apt-get install -y ppp",
   "remoteUser": "vscode",
   "mounts": [
