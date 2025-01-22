@@ -2,10 +2,6 @@
   "name": "Ubuntu Dev Container",
   "dockerFile": "Dockerfile",
   "privileged": true,
-  "runArgs": [
-    "--cap-add=NET_ADMIN",
-    "--device=/dev/ppp"
-  ],
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {}
   },
@@ -17,10 +13,7 @@
     "ms-python.python",
     "ms-azuretools.vscode-docker"
   ],
-  "initializeCommand": "modprobe ppp_generic",
+  "initializeCommand": "modprobe l2tp_ppp",
   "postCreateCommand": "sudo apt-get update && sudo apt-get install -y ppp",
-  "remoteUser": "vscode",
-  "mounts": [
-    "source=/dev/ppp,target=/dev/ppp,type=bind"
-  ]
+  "remoteUser": "vscode"
 }
