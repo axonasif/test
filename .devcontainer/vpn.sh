@@ -1,23 +1,24 @@
 #!/bin/bash
 
-function main() {
-  set -eux
+VPN_CREDS_PATH="/home/vscode/vpn_creds"
+if [ ! -f "$VPN_CREDS_PATH" ]; then
+  echo "VPN credentials file not found at $VPN_CREDS_PATH"
+  exit 0
+fi
+source "$VPN_CREDS_PATH"
+
+function setup() {
 
   apt-get update
   apt-get install strongswan xl2tpd net-tools -yq
 
-  VPN_CREDS_PATH="/home/vscode/vpn_creds"
-  if [ ! -f "$VPN_CREDS_PATH" ]; then
-    echo "VPN credentials file not found at $VPN_CREDS_PATH"
-    return 0
-  fi
-
-  source "/home/vscode/vpn_creds"
+  # Add DNS servers for VPN
+  for dns in "1.1.1.1" "1.0.0.1"; do echo "nameserver $dns" >> "/etc/resolv.conf"; done
 
   cat > /etc/ipsec.conf <<EOF
   # ipsec.conf - strongSwan IPsec configuration file
 
-  conn myvpn
+  conn $VPN_NAME
     auto=add
     keyexchange=ikev1
     authby=secret
@@ -37,7 +38,7 @@ EOF
   chmod 600 /etc/ipsec.secrets
 
   cat > /etc/xl2tpd/xl2tpd.conf <<EOF
-  [lac myvpn]
+  [lac $VPN_NAME]
   lns = $VPN_SERVER_IP
   ppp debug = yes
   pppoptfile = /etc/ppp/options.l2tpd.client
@@ -68,4 +69,23 @@ EOF
   touch /var/run/xl2tpd/l2tp-control
 }
 
-main
+function start() {
+  ipsec restart
+  service xl2tpd restart
+  ipsec up "$VPN_NAME"
+  echo "c $VPN_NAME" > /var/run/xl2tpd/l2tp-control
+  gateway_ip="$(ip route | awk '/default via/ {print $3}')"
+  route add "$VPN_SERVER_IP" gw "$gateway_ip"
+  route add default dev ppp0
+}
+
+function main() {
+  set -eux
+  case "$1" in
+   setup|setup)
+    "$1"
+   ;;
+   esac
+}
+
+main "$@"

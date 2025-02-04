@@ -1,0 +1,8 @@
+services:
+    vpn:
+        name: L2TP/IPsec
+        commands:
+            start: |
+              sudo bash .devcontainer/vpn.sh start
+        triggeredBy:
+            - postEnvironmentStart
