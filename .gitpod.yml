@@ -1,6 +1,6 @@
 # image:
 #   file: .gitpod.Dockerfile
 
-# tasks:
-#   - name: setup-development-override-env
-#     command: ./gitpod/setup_env_override.sh
+tasks:
+  - name: setup-development-override-env
+    command: echo lol
