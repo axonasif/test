@@ -1,8 +1,24 @@
-services:
-    vpn:
-        name: Testing
-        commands:
-            start: |
-              bash .devcontainer/test.sh
+tasks:
+    taskReference:
+        # Name is a required, human readable string.
+        name: Human readable name
+        description: Optional description providing more detail
+        # triggeredBy lists all trigger that start the service. If none are provided the service isn't started automatically.
+        # See below for a complete list of trigger.
         triggeredBy:
+            # postEnvironmentStart activates every time the environment is started, e.g. on first start
             - postEnvironmentStart
+        # command is the actual task command that gets executed. Gitpod will run this as a shell script, i.e. multiline input is possible
+        command: |
+            echo We are in the workspace directory: $PWD
+            echo Let's go
+            bash .devcontainer/test.sh
+
+# services:
+#     vpn:
+#         name: Testing
+#         commands:
+#             start: |
+#               bash .devcontainer/test.sh
+#         triggeredBy:
+#             - postEnvironmentStart
