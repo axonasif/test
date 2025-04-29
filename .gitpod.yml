@@ -4,3 +4,9 @@ image:
 tasks:
   - name: setup-development-override-env
     command: ./gitpod/setup_env_override.sh
+
+
+jetbrains:
+    intellij:
+        plugins:
+            - org.intellij.scala
