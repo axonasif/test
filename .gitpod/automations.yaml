@@ -1,8 +1,8 @@
 services:
-    vpn:
-        name: L2TP/IPsec
+    tailscale:
+        name: Tailscale
         commands:
-            start: |
-              sudo bash .devcontainer/vpn.sh start
+          start: sudo tailscale up --accept-routes --auth-key $TAILSCALE­_AUTHKEY
+          stop: sudo tailscale down
         triggeredBy:
             - postEnvironmentStart
