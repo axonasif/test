@@ -4,6 +4,11 @@
   "workspaceFolder": "/workspaces",
   "remoteUser": "vscode",
   "updateRemoteUserUID": true,
+  "features": {
+    "ghcr.io/tailscale/codespace/tailscale": {},
+    "ghcr.io/itsmechlark/features/snowflake-odbc:1": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
   "runArgs": ["--device=/dev/net/tun", "--privileged", "--network=host"],
   "customizations": {
     "vscode": {
