@@ -2,7 +2,7 @@ services:
     tailscale:
         name: Tailscale
         commands:
-          start: sudo tailscale up --accept-routes --auth-key $TAILSCALE­_AUTHKEY
+          start: sudo tailscale up --accept-routes --auth-key $TEST
           stop: sudo tailscale down
         triggeredBy:
             - postEnvironmentStart
