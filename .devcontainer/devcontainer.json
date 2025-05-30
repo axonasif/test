@@ -1,19 +1,15 @@
 {
   "name": "Ubuntu Dev Container",
-  "dockerFile": "Dockerfile",
-  "privileged": true,
-  "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
-  },
-  "settings": {
-    "terminal.integrated.shell.linux": "/bin/bash"
-  },
-  "extensions": [
-    "ms-vscode.cpptools",
-    "ms-python.python",
-    "ms-azuretools.vscode-docker"
-  ],
-  "initializeCommand": "modprobe l2tp_ppp",
-  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y ppp",
-  "remoteUser": "vscode"
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "workspaceFolder": "/workspaces",
+  "remoteUser": "vscode",
+  "updateRemoteUserUID": true,
+  "runArgs": ["--device=/dev/net/tun", "--privileged", "--network=host"],
+  "customizations": {
+    "vscode": {
+      "settings": {
+      "terminal.integrated.defaultProfile.linux": "zsh"
+      }
+    }
+  }
 }
