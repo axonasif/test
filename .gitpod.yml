@@ -1,6 +1,0 @@
-
-
-jetbrains:
-    intellij:
-        plugins:
-            - org.intellij.scala

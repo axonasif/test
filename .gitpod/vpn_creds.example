@@ -1,7 +1,0 @@
-# Create a secret file at /home/vscode/vpn_creds with such data
-# Instructions: https://www.gitpod.io/docs/flex/secrets#creating-a-secret
-VPN_NAME=myvpn
-VPN_SERVER_IP='13.123.345.54'
-VPN_IPSEC_PSK='FSJhdf83hfd'
-VPN_USER='vpnuser'
-VPN_PASSWORD='fhkjdjfs83f'
