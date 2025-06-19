@@ -1,0 +1,20 @@
+services:  
+  localstack:
+    image: localstack/localstack
+    ports:
+      - "127.0.0.1:4566:4566"
+      - "127.0.0.1:4510-4559:4510-4559"
+    environment:
+      - SERVICES=sqs,sns
+      - LS_LOG=warn
+    healthcheck:
+      test: 'curl -s localhost:4566/_localstack/init/ready | grep -q "\"completed\": true"'
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 60s
+    # networks:
+    #   pento-network:
+    #     ipv4_address: 10.0.2.20
+    volumes:
+      - "./scripts/init-localstack.sh:/etc/localstack/init/ready.d/init-localstack.sh"
