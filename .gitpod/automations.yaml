@@ -1,8 +1,20 @@
-services:
-    tailscale:
-        name: Tailscale
-        commands:
-          start: sudo tailscale up --accept-routes --auth-key $TAILSCALE_AUTHKEY
-          stop: sudo tailscale down
+# defines automation tasks (optional)
+tasks:
+    openURLs:
+        # Name is a required, human readable string.
+        name: Open URLs
+        description: You need to click on the URLs to open
+        # triggeredBy lists all trigger that start the service. If none are provided the service isn't started automatically.
+        # See below for a complete list of trigger.
         triggeredBy:
+            # postEnvironmentStart activates every time the environment is started, e.g. on first start
             - postEnvironmentStart
+            # postDevcontainerStart activates every time the devcontainer is started, e.g. on first start or devcontainer rebuild
+            - postDevcontainerStart
+            # manual trigger provides a unique affordance in the user interface, allowing developers to start an action on demand.
+            - manual
+        # dependsOn expresses a dependency on another task which ensures that this other task runs before this one.
+        # command is the actual task command that gets executed. Gitpod will run this as a shell script, i.e. multiline input is possible
+        command: |
+            echo "Frontend preview: https://localhost:8000"
+            echo "Testing: https://localhost:3000"
