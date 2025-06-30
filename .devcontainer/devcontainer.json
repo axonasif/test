@@ -1,13 +1,10 @@
 {
   "name": "Ubuntu Dev Container",
   "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
-  "workspaceFolder": "/workspaces",
   "remoteUser": "vscode",
   "updateRemoteUserUID": true,
   "features": {
-    "ghcr.io/tailscale/codespace/tailscale": {},
-    "ghcr.io/itsmechlark/features/snowflake-odbc:1": {},
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+    "ghcr.io/devcontainers/features/python:1"
   },
   "runArgs": ["--device=/dev/net/tun", "--privileged", "--network=host"],
   "customizations": {
