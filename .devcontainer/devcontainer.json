@@ -2,16 +2,11 @@
   "name": "Ubuntu Dev Container",
   "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
   "remoteUser": "vscode",
-  "updateRemoteUserUID": true,
-  "features": {
-    "ghcr.io/devcontainers/features/python:1"
-  },
-  "runArgs": ["--device=/dev/net/tun", "--privileged", "--network=host"],
   "customizations": {
-    "vscode": {
-      "settings": {
-      "terminal.integrated.defaultProfile.linux": "zsh"
+      "jetbrains": {
+          "plugins": [
+              "org.intellij.plugins.hcl"
+          ]
       }
-    }
   }
 }
