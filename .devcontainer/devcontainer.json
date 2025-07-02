@@ -2,11 +2,4 @@
   "name": "Ubuntu Dev Container",
   "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
   "remoteUser": "vscode",
-  "customizations": {
-      "jetbrains": {
-          "plugins": [
-              "org.intellij.plugins.hcl"
-          ]
-      }
-  }
 }
