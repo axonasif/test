@@ -20,7 +20,8 @@ ides=(
 REAL_JB_DATA_DIR="/usr/local/gitpod/shared/jetbrains/.local/share"
 SYMLINK_JB_DIR="$HOME/.local/share/JetBrains"
 PLUGINS_DIR="$REAL_JB_DATA_DIR/plugins"
-mkdir -m 0777 -p "$PLUGINS_DIR" "${SYMLINK_JB_DIR%/*}" && cd "$PLUGINS_DIR"
+mkdir -m 0777 -p "${SYMLINK_JB_DIR%/*}"
+sudo mkdir -m 0777 -p "$PLUGINS_DIR" && cd "$PLUGINS_DIR"
 ln -sf "$REAL_JB_DATA_DIR" "$SYMLINK_JB_DIR"
 for plugin in "${plugins[@]}"; do {
     curl -L "$plugin" -o /tmp/download
