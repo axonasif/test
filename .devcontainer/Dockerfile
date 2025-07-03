@@ -18,7 +18,7 @@ ides=(
     "WebStorm2025.1"
 )
 
-mkdir -o 0777 -p "$PLUGINS_DIR" "${SYMLINK_JB_DIR%/*}" && cd "$PLUGINS_DIR"
+mkdir -m 0777 -p "$PLUGINS_DIR" "${SYMLINK_JB_DIR%/*}" && cd "$PLUGINS_DIR"
 ln -sf "$REAL_JB_DATA_DIR" "$SYMLINK_JB_DIR"
 for plugin in "${plugins[@]}"; do {
     curl -L "$plugin" -o /tmp/download
