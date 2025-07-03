@@ -5,8 +5,9 @@ ENV HOME=/home/vscode
 SHELL [ "/bin/bash", "-c" ]
 RUN <<'SCRIPT'
 set -eux
-JB_DIR="$HOME/.local/share/JetBrains"
-PLUGINS_DIR="$JB_DIR/plugins"
+REAL_JB_DATA_DIR="/usr/local/gitpod/shared/jetbrains/.local/share"
+SYMLINK_JB_DIR="$HOME/.local/share/JetBrains"
+PLUGINS_DIR="$REAL_JB_DATA_DIR/plugins"
 
 plugins=(
     "https://plugins.jetbrains.com/plugin/download?rel=true&updateId=780441" # Copied from https://plugins.jetbrains.com/plugin/7808-terraform-and-hcl/versions/stable -> 2025.1.3
@@ -17,7 +18,8 @@ ides=(
     "WebStorm2025.1"
 )
 
-mkdir -p "$PLUGINS_DIR" && cd "$PLUGINS_DIR"
+mkdir -o 0777 -p "$PLUGINS_DIR" "${SYMLINK_JB_DIR%/*}" && cd "$PLUGINS_DIR"
+ln -sf "$REAL_JB_DATA_DIR" "$SYMLINK_JB_DIR"
 for plugin in "${plugins[@]}"; do {
     curl -L "$plugin" -o /tmp/download
     unzip /tmp/download
