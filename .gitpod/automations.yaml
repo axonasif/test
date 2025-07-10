@@ -1,47 +1,47 @@
-# defines automation services (optional)
-services:
-    # serviceReference is an identifier for the service within the environment.
-    # It is used when referencing the service, e.g. from the CLI.
-    # It needs to only contain alphanumeric characters, underscores, and hyphens, and must be between 1 and 128 characters long.
-    fakeWebServices:
-        name: Fake Web Services
-        triggeredBy:
-          - postEnvironmentStart
-        commands:
-          start: sleep 5 && python3 -m http.server 8000 & python3 -m http.server 3000
+# # defines automation services (optional)
+# services:
+#     # serviceReference is an identifier for the service within the environment.
+#     # It is used when referencing the service, e.g. from the CLI.
+#     # It needs to only contain alphanumeric characters, underscores, and hyphens, and must be between 1 and 128 characters long.
+#     fakeWebServices:
+#         name: Fake Web Services
+#         triggeredBy:
+#           - postEnvironmentStart
+#         commands:
+#           start: sleep 5 && python3 -m http.server 8000 & python3 -m http.server 3000
 
-    openURLs:
-        # Name is a required, human readable string.
-        name: Open URLs in browser
-        description: Click on the URLs to open them in your browser
-        # triggeredBy lists all trigger that start the service. If none are provided the service isn't started automatically.
-        # See below for a complete list of trigger.
-        triggeredBy:
-            # postEnvironmentStart activates every time the environment is started, e.g. on first start
-            - postEnvironmentStart
-            # postDevcontainerStart activates every time the devcontainer is started, e.g. on first start or devcontainer rebuild
-            - postDevcontainerStart
-            # manual trigger provides a unique affordance in the user interface, allowing developers to start an action on demand.
-            - manual
-        commands:
-            # start is a mandatory command constitutes the service itself and is expected to continue running until stopped.
-            # If this command fails (i.e. exits with a non-zero exit code), the service is considered failed.
-            start: |
-                function check_port() {
-                    if { exec 3<>/dev/tcp/127.0.0.1/$1; } 2>/dev/null; then
-                        exec 3<&-  # Close input
-                        exec 3>&-  # Close output
-                        return 0
-                    else
-                        return 1
-                    fi
-                }
+#     openURLs:
+#         # Name is a required, human readable string.
+#         name: Open URLs in browser
+#         description: Click on the URLs to open them in your browser
+#         # triggeredBy lists all trigger that start the service. If none are provided the service isn't started automatically.
+#         # See below for a complete list of trigger.
+#         triggeredBy:
+#             # postEnvironmentStart activates every time the environment is started, e.g. on first start
+#             - postEnvironmentStart
+#             # postDevcontainerStart activates every time the devcontainer is started, e.g. on first start or devcontainer rebuild
+#             - postDevcontainerStart
+#             # manual trigger provides a unique affordance in the user interface, allowing developers to start an action on demand.
+#             - manual
+#         commands:
+#             # start is a mandatory command constitutes the service itself and is expected to continue running until stopped.
+#             # If this command fails (i.e. exits with a non-zero exit code), the service is considered failed.
+#             start: |
+#                 function check_port() {
+#                     if { exec 3<>/dev/tcp/127.0.0.1/$1; } 2>/dev/null; then
+#                         exec 3<&-  # Close input
+#                         exec 3>&-  # Close output
+#                         return 0
+#                     else
+#                         return 1
+#                     fi
+#                 }
 
-                until check_port 3000 && check_port 8000; do
-                    echo "Port 3000 & 8000 not ready yet..."
-                    sleep 1
-                done
+#                 until check_port 3000 && check_port 8000; do
+#                     echo "Port 3000 & 8000 not ready yet..."
+#                     sleep 1
+#                 done
 
-                echo "Click on the URLs to open them in your browser"
-                echo "Frontend preview: https://localhost:8000"
-                echo "Testing: https://localhost:3000"
+#                 echo "Click on the URLs to open them in your browser"
+#                 echo "Frontend preview: https://localhost:8000"
+#                 echo "Testing: https://localhost:3000"
