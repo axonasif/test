@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/devcontainers/base:ubuntu
 
 USER vscode
 ENV HOME=/home/vscode
-# SHELL [ "/bin/bash", "-c" ]
+SHELL [ "/bin/bash", "-c" ]
 # RUN <<'SCRIPT'
 # set -eux
 
