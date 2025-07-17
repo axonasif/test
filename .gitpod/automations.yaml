@@ -54,21 +54,23 @@ tasks:
         description: Clone init repository
         name: "Clone init repository"
         triggeredBy:
-            - postDevcontainerStart
-    setupRust:
-        command: /workspaces/init/rust/setup.sh ${GITPOD_GIT_USER_EMAIL} ${ARTIFACTORY_TOKEN}
-        description: Configure rust environment
-        name: "Configure rust"
-        dependsOn:
-            - cloneInit
-        triggeredBy:
-            - postDevcontainerStart
+          - manual
+          
     gitHooks:
         command: /workspaces/init/git/setup.sh
         description: Configure git hooks
         name: "Configure git"
         dependsOn:
-            - cloneInit
+          - cloneInit
+        triggeredBy:
+          - manual
+    
+    setupRust:
+        command: /workspaces/init/rust/setup.sh ${GITPOD_GIT_USER_EMAIL} ${ARTIFACTORY_TOKEN}
+        description: Configure rust environment
+        name: "Configure rust"
         triggeredBy:
             - postDevcontainerStart
-            
+        dependsOn:
+          - cloneInit
+          - gitHooks
