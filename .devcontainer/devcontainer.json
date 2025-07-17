@@ -8,4 +8,5 @@
     "ghcr.io/devcontainers/features/docker-in-docker:2": {}
   },
   "remoteUser": "vscode",
+  "workspaceFolder": "/workspace"
 }

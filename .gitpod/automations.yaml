@@ -50,7 +50,7 @@
 tasks:
     cloneInit:
         command: |
-            git clone https://github.com/allforks/automations_bug /workspaces/init || true
+            git clone https://github.com/allforks/automations_bug /workspace/init || true
         description: Clone init repository
         name: "Clone init repository"
         triggeredBy:
