@@ -74,3 +74,11 @@ tasks:
         dependsOn:
           - cloneInit
           - gitHooks
+
+    testVar:
+        name: Test project variable
+        command: |
+          echo ${FOO:-'not set :('}
+          echo "$FOO" > $HOME/foo
+        triggeredBy:
+          - postDevcontainerStart
