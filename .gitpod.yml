@@ -1,4 +1,4 @@
-image: us-central1-docker.pkg.dev/developer-community-success/hello-gitpod/base-mod:latest
+image: us-central1-docker.pkg.dev/gitpodify/gitpod-images/mini:latest
 
 github:
   prebuilds:
