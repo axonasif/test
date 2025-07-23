@@ -1,5 +1,1 @@
-image: axonasif/workspace-test:latest
-
-github:
-  prebuilds:
-    branches: true
+image: docker.io/axonasif/workspace-base-vnc
