@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/devcontainers/base:ubuntu
+FROM us-central1-docker.pkg.dev/gitpodify/gitpod-images/mini:latest
 
 USER vscode
 ENV HOME=/home/vscode
