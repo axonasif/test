@@ -1,11 +1,8 @@
 {
   "name": "Ubuntu Dev Container",
-  "build": {
-    "dockerfile": "Dockerfile",
-    "context": "."
-  },
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {}
   },
-  "remoteUser": "vscode",
+  "remoteUser": "vscode"
 }
