@@ -1,7 +1,11 @@
+ARG HEY
+
 FROM us-central1-docker.pkg.dev/gitpodify/gitpod-images/mini:latest
 
 USER vscode
 ENV HOME=/home/vscode
+
+RUN echo "$HEY" > $HOME/hey
 # SHELL [ "/bin/bash", "-c" ]
 # RUN <<'SCRIPT'
 # set -eux
