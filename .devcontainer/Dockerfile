@@ -1,6 +1,6 @@
 ARG HEY
 
-FROM us-central1-docker.pkg.dev/gitpodify/gitpod-images/mini:latest
+FROM mcr.microsoft.com/devcontainers/base:ubuntu-24.04
 
 USER vscode
 ENV HOME=/home/vscode
