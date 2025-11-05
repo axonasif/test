@@ -59,6 +59,7 @@ services:
             start: |
                 date=$(date)
                 echo "$date" > /workspaces/test/"$date"
+                sleep infinity
             stop: |
                 true
             ready: |
