@@ -59,6 +59,7 @@ services:
             start: |
                 date=$(date)
                 echo "$date" > /workspaces/"$date"
-            stop: true
+            stop: |
+                true
             ready: sleep 5
             
