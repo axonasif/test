@@ -47,38 +47,121 @@
 #                 echo "Testing: https://localhost:3000"
 
 
-tasks:
-    cloneInit:
-        command: |
-            git clone https://github.com/allforks/automations_bug /workspaces/init || true
-        description: Clone init repository
-        name: "Clone init repository"
-        triggeredBy:
-          - manual
-          
-    gitHooks:
-        command: /workspaces/init/git/setup.sh
-        description: Configure git hooks
-        name: "Configure git"
-        dependsOn:
-          - cloneInit
-        triggeredBy:
-          - manual
-    
-    setupRust:
-        command: /workspaces/init/rust/setup.sh ${GITPOD_GIT_USER_EMAIL} ${ARTIFACTORY_TOKEN}
-        description: Configure rust environment
-        name: "Configure rust"
+
+services:
+    mysql:
+        name: MySQL Service
+        description: Runs MySQL server manually and keeps it alive while port 3306 is open
         triggeredBy:
             - postDevcontainerStart
-        dependsOn:
-          - cloneInit
-          - gitHooks
+            # - postEnvironmentStart
+        commands:
+            start: |
+                # Start mysql server in safe mode
+                mysqld_safe --datadir=/var/lib/mysql \
+                            --socket=/var/run/mysqld/mysqld.sock \
+                            --pid-file=/var/run/mysqld/mysqld.pid \
+                            --user=mysql &
 
-    testVar:
-        name: Test project variable
-        command: |
-          echo ${FOO:-'not set :('}
-          echo "$FOO" > $HOME/foo
+                # Wait before running setup
+                sleep 10
+
+                # Run mysql setup script
+                chmod +x .gitpod/setup/setup_mysql.sh && .gitpod/setup/setup_mysql.sh
+
+                # Keep service alive while port 3306 is open
+                chmod +x .gitpod/helpers/keep-alive-until-port-closed.sh
+                .gitpod/helpers/keep-alive-until-port-closed.sh localhost 3306 5 3
+            stop: mysqladmin -u root -proot shutdown || true
+            
+    redis:
+        name: Redis Service
+        description: Runs Redis server in background and keeps it alive while port 6379 is open
         triggeredBy:
-          - postDevcontainerStart
+            - postDevcontainerStart
+            # - postEnvironmentStart
+        commands:
+            start: |
+                # Start redis in background
+                redis-server --daemonize yes
+
+                # Keep service alive while port 6379 is open
+                chmod +x .gitpod/helpers/keep-alive-until-port-closed.sh
+                .gitpod/helpers/keep-alive-until-port-closed.sh localhost 6379 5 3
+            stop: redis-cli shutdown
+            
+    php-server:
+        name: PHP Development Server
+        description: Runs Laravel setup and starts PHP built-in server
+        triggeredBy:
+            - postDevcontainerStart
+            # - postEnvironmentStart
+        commands:
+            start: |
+                # Run base environment setup
+                chmod +x .gitpod/setup/setup_environment.sh && .gitpod/setup/setup_environment.sh
+
+                # Run laravel setup (composer + artisan)
+                chmod +x .gitpod/setup/setup_laravel.sh && .gitpod/setup/setup_laravel.sh
+
+                # Restart tail process for logs
+                killall -q tail || true
+                touch storage/logs/laravel.log
+                tail -f -n 0 storage/logs/laravel.log | egrep -v '^#' &
+
+                # Start php built-in server
+                PHP_CLI_SERVER_WORKERS=10 php -S 0.0.0.0:8000 -t public .gitpod/cachingRouter.php
+            stop: killall php || true
+            
+    npm-hot-reload:
+        name: NPM Hot Reload Service
+        description: Installs dependencies and runs Laravel Mix hot reload server
+        triggeredBy:
+            - postDevcontainerStart
+            # - postEnvironmentStart
+        commands:
+            start: |
+                # Install NPM dependencies & run hot reload server
+                npm install
+                npm run hot-gitpod
+            stop: killall node || true
+            
+    expose-tunnel:
+        name: Expose.dev Tunnel Server
+        description: Creates public tunnel for Laravel dev server via Expose.dev
+        triggeredBy:
+            - postDevcontainerStart
+            # - postEnvironmentStart
+        commands:
+            start: |
+                # Run custom port setup
+                chmod +x .gitpod/setup/setup_ports.sh && .gitpod/setup/setup_ports.sh
+
+                # Authenticate expose client
+                .gitpod/expose token ${EXPOSE_DEV_TOKEN}
+
+                # Keep sharing tunnel to expose.dev
+                while true; do 
+                .gitpod/expose share http://0.0.0.0:8000 \
+                    --domain=dev.ideasoverflow.nl \
+                    --server=eu-1 \
+                    --subdomain=${EXPOSE_SUBDOMAIN_HANSON}
+                sleep 5
+                done
+            stop: killall expose || true
+
+    queue-worker:
+        name: Laravel Queue Worker
+        description: Waits for port 8000 and starts a Laravel queue worker
+        triggeredBy:
+            - postDevcontainerStart
+            # - postEnvironmentStart
+        commands:
+            start: |
+                # Wait for port 8000 using helper
+                chmod +x .gitpod/helpers/wait-for-port.sh
+                .gitpod/helpers/wait-for-port.sh localhost 8000
+
+                # Run worker for specified queue (default if not provided)
+                php artisan queue:work --queue=default,website-requests,offer-maintenances,analytics,mailchimp,user-emails,offers-export
+            stop: killall php || true
